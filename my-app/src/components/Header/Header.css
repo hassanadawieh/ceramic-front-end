@@ -1,0 +1,91 @@
+.header-contain {
+  position: fixed;
+  width: 100%;
+  transition: background-color 0.5s ease;
+  transition: box-Shadow 0.5s ease;
+  z-index: 999;
+}
+
+.main-Header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  height: 10vh;
+  width: 100%;
+  position: fixed;
+  color: white;
+  z-index: 1;
+}
+
+.main-Header img {
+  width: 8rem;
+  height: 6rem;
+}
+
+.list-pages {
+  display: flex;
+  justify-content: space-between;
+  width: 25%;
+}
+
+.link {
+  color: white;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.list-pages .first {
+  text-decoration: none;
+}
+
+.login-order {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 12%;
+}
+
+.order-button {
+  padding: 10px 15px;
+  background-color: var(--A);
+  border-radius: 15px;
+  color: var(--E);
+  transition: padding 0.5s;
+  color: var(--E);
+  text-decoration: none;
+}
+
+.order-button:hover {
+  cursor: pointer;
+  padding: 12px 17px;
+  /* color: white; */
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.link:hover {
+  color: var(--A);
+  cursor: pointer;
+}
+
+.dropDown {
+  position: absolute;
+  right: -90%;
+  top: 18px;
+  width: 150%;
+  background-color: var(--B );
+  color: white;
+  border-radius:10px 10px;
+  padding: 10px;
+}
+
+.categorylinks {
+  position: relative;
+}
+.category-element:hover {
+  color: var(--A);
+}
