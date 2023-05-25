@@ -1,18 +1,24 @@
-import React, { useState, useEffect , useContext } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import Mycontext from "../../../src/MyContext";
 import axios from "axios";
 import Brand from "../../images/brand.svg";
 import Logo from "../../images/logo.svg";
 import { NavLink } from "react-router-dom";
+import { FaAlignJustify, FaAlignCenter } from "react-icons/fa";
 import "./Header.css";
 const Header = () => {
   const [backgroundColor, setBackgroundColor] = useState("transparent");
   const [boxShadow, setBoxShadow] = useState("");
   const [showDropdown, setShowDropdown] = useState(false);
   const [categories, setCategories] = useState([]);
-
+  const [open, setOpen] = useState(false);
   // get the useContext category name
-const { categoryName, setCategoryName } = useContext(Mycontext);
+  const { categoryName, setCategoryName } = useContext(Mycontext);
+
+  // make active style to the drop down
+    let activeStyle = {
+      borderBottom: "3px solid var(--A)",
+    };
 
   const handleMouseOver = () => {
     setShowDropdown(true);
@@ -48,13 +54,22 @@ const { categoryName, setCategoryName } = useContext(Mycontext);
   };
 
   const handleStoreCategoryName = (element) => {
-      setCategoryName(element);
-  }
+    setCategoryName(element);
+  };
 
   useEffect(() => {
     fetchCategories();
   }, []);
 
+  // functions to action the drop up and down
+    const handelMenuShow = () => {
+      setOpen(true);
+    };
+
+    const handelMenuHidden = () => {
+      setOpen(false);
+    };
+   console.log(open)
   return (
     <div className="header-container">
       <div
@@ -63,17 +78,29 @@ const { categoryName, setCategoryName } = useContext(Mycontext);
       >
         <div className="logo">
           <img src={Logo} />
-          <img src={Brand} />
+          <img className="brand-name" src={Brand} />
         </div>
         <div className="list-pages">
-          <NavLink className="link" to="/">
+          <NavLink
+            className="link"
+            to="/"
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
             Home
           </NavLink>
-          <NavLink className="link" to="/products">
-            Products
-          </NavLink>
-          <NavLink className="link" to="/contact">
+          <NavLink
+            className="link"
+            to="/contact"
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
             Contact
+          </NavLink>
+          <NavLink
+            className="link"
+            to="/products"
+            style={({ isActive }) => (isActive ? activeStyle : undefined)}
+          >
+            Products
           </NavLink>
           <div
             onMouseOver={handleMouseOver}
@@ -89,7 +116,7 @@ const { categoryName, setCategoryName } = useContext(Mycontext);
                   <NavLink
                     to="/products"
                     className="category-element"
-                    onClick={() => handleStoreCategoryName("All Categories")}
+                    onClick={() => {handleStoreCategoryName("All Categories") ; handelMenuHidden()}}
                   >
                     All Categories
                   </NavLink>
@@ -99,7 +126,7 @@ const { categoryName, setCategoryName } = useContext(Mycontext);
                     <NavLink
                       to="/products"
                       className="category-element"
-                      onClick={() => handleStoreCategoryName(element.name)}
+                      onClick={() => {handleStoreCategoryName(element.name) ; handelMenuHidden()}}
                       key={element._id}
                     >
                       {element.name}
@@ -111,13 +138,126 @@ const { categoryName, setCategoryName } = useContext(Mycontext);
           </div>
         </div>
         <div className="login-order">
-          <NavLink className="link" to="/login">
+          <NavLink className="link header-login" to="/login">
             Login
           </NavLink>
           <NavLink to="/order" className="order-button">
-            Your order
+            Your Favorite
           </NavLink>
+          {!open ? (
+            <FaAlignJustify className="toggle_btn" onClick={handelMenuShow} />
+           
+          ) : (
+            <FaAlignCenter className="toggle_btn" onClick={handelMenuHidden} />
+          )}
         </div>
+        {open ? (
+          <div className="dropdown_menu">
+            <NavLink
+              className="link"
+              to="/"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              onClick={handelMenuHidden}
+            >
+              Home
+            </NavLink>
+            <NavLink
+              className="link"
+              to="/contact"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              onClick={handelMenuHidden}
+            >
+              Contact
+            </NavLink>
+            <NavLink
+              className="link"
+              to="/products"
+              style={({ isActive }) => (isActive ? activeStyle : undefined)}
+              onClick={handelMenuHidden}
+            >
+              Products
+            </NavLink>
+            <div
+              onMouseOver={handleMouseOver}
+              onMouseOut={handleMouseOut}
+              className="link categorylinks"
+              to="/"
+            >
+              Category{" "}
+              {showDropdown && (
+                <div className="dropDown">
+                  <h4>
+                    {" "}
+                    <NavLink
+                      to="/products"
+                      className="category-element"
+                      onClick={() => handleStoreCategoryName("All Categories")}
+                    >
+                      All Categories
+                    </NavLink>
+                  </h4>
+                  {categories.map((element) => (
+                    <h4 key={element._id}>
+                      <NavLink
+                        to="/products"
+                        className="category-element"
+                        onClick={() => handleStoreCategoryName(element.name)}
+                        key={element._id}
+                      >
+                        {element.name}
+                      </NavLink>
+                    </h4>
+                  ))}
+                </div>
+              )}
+            </div>
+            {/* <li>
+                <NavLink
+                  className="link"
+                  to="/"
+                  href="#hero"
+                  onClick={handelMenuHidden}
+                  style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                >
+                  Home
+                </NavLink>
+              </li>
+
+              <li>
+                <NavLink
+                  className="link"
+                  to="/products"
+                  href="#hero"
+                  onClick={handelMenuHidden}
+                  style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                >
+                  Products
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className="link"
+                  to="/training"
+                  href="#hero"
+                  onClick={handelMenuHidden}
+                  style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                >
+                  Training
+                </NavLink>
+              </li>
+              <li>
+                <NavLink
+                  className="link"
+                  to="/contact"
+                  href="#hero"
+                  onClick={handelMenuHidden}
+                  style={({ isActive }) => (isActive ? activeStyle : undefined)}
+                >
+                  Contact
+                </NavLink>
+              </li> */}
+          </div>
+        ) : null}
       </div>
     </div>
   );

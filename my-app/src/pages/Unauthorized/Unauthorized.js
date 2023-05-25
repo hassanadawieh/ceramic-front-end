@@ -1,5 +1,5 @@
-import React from 'react'
-
+import React from 'react';
+import "./Unauthorized.css";
  const Unauthorized = () => {
   return (
     <div>Unauthorized</div>

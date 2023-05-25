@@ -19,6 +19,9 @@
   justify-content: space-between;
   position: relative;
   flex-wrap: wrap;
+  border: 2px solid var(--E);
+  border-radius: var(--Radius);
+  box-shadow: -8px 10px 14px 9px black;
 }
 
 .image {
@@ -121,5 +124,9 @@ color: black;
 
     .info-product div{
         margin-left: 0px;
+    }
+
+    .image {
+      height: 40vh;
     }
 }

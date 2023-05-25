@@ -37,7 +37,7 @@ import "./Carosel.css";
           </span>
         ))}
       </div>
-      <NavLink to="/products" className='show-products'>shop now</NavLink>
+      <NavLink to="/products" className='show-products'>View now</NavLink>
     </div>
   );
 }

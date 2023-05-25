@@ -39,18 +39,17 @@ const ShowProduct = (props) => {
         <div className="info-product" ref={infoProductRef}>
           <div>
             <p className="info">
-              <b>Title:</b>
+              
               {dataProduct.name}
             </p>
             <p className="info">
-              <b>Category:</b>
               {nameCategory}
             </p>
             <p className="info">
-              <b>Type:</b>{nameSubCategory}
+              {nameSubCategory}
             </p>
             <p className="info">
-              <b>Description:</b>{dataProduct.description}
+              {dataProduct.description}
             </p>
           </div>
         </div>
