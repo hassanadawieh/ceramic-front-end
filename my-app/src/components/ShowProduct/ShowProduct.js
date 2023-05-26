@@ -15,7 +15,7 @@ const ShowProduct = (props) => {
     setOrder([...order , id])
   }
   const fetchData = () => {
-    axios.get(`${process.env.REACT_APP_API_URL}/product/${props.id}`)
+    axios.get(`${process.env.REACT_APP_API_URL}/api/product/${props.id}`)
     .then((response) => {
         setDataProduct(response.data)
         setNameCategory(response.data.subCategory[0].category.name)
@@ -33,7 +33,7 @@ const ShowProduct = (props) => {
         <div className="showProduct-price">${dataProduct.price}</div>
         <img
           className="image"
-          src={`http://localhost:5000/${dataProduct.image}`}
+          src={`${process.env.REACT_APP_API_URL}/${dataProduct.image}`}
           alt="product-img"
         />
         <div className="info-product" ref={infoProductRef}>

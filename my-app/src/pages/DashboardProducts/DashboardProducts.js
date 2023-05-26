@@ -24,7 +24,7 @@ function DashboardProducts() {
     description: "",
     image: null,
     price: "",
-    category: [],
+    subCategory: [],
   });
 
   const [productEditData, setProductEditData] = useState({
@@ -32,7 +32,7 @@ function DashboardProducts() {
     description: "",
     image: null,
     price: "",
-    category: "",
+    subCategory: "",
   });
   const [isEdit, setIsEdit] = useState(false);
 
@@ -78,11 +78,11 @@ function DashboardProducts() {
     { field: "description", headerName: "Description", width: 300 },
     { field: "price", headerName: "Price", width: 60 },
     {
-      field: "category",
-      headerName: "Category",
+      field: "subCategory",
+      headerName: "SubCategory",
       width: 260,
       valueGetter: (params) => {
-        return params.row.category.map((cat) => cat.name).join(", ");
+        return params.row.subCategory.map((cat) => cat.name).join(", ");
       },
     },
     {
@@ -164,7 +164,7 @@ function DashboardProducts() {
     productAddForm.append("description", productAddData.description);
     productAddForm.append("price", productAddData.price);
     productAddForm.append("image", productAddData.image);
-    productAddForm.append("category", productAddData.category._id);
+    productAddForm.append("subCategory", productAddData.subCategory._id);
 
     try {
       const response = await axios.post(
@@ -210,7 +210,7 @@ function DashboardProducts() {
     productEditForm.append("description", productEditData.description);
     productEditForm.append("price", productEditData.price);
     productEditForm.append("image", productEditData.image);
-    productEditForm.append("category", productEditData.category._id);
+    productEditForm.append("subCategory", productEditData.subCategory._id);
 
     try {
       const response = await axios.put(
@@ -286,7 +286,7 @@ function DashboardProducts() {
   const getCategories = async () => {
     try {
       const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/category`
+        `${process.env.REACT_APP_API_URL}/api/subCategory`
       );
       console.log(response.data);
       setCategories(response.data);
@@ -354,29 +354,29 @@ function DashboardProducts() {
               Category
               <select
                 className="dashboard-admin-select"
-                name="category"
+                name="subCategory"
                 value={
                   isEdit
-                    ? productEditData.category.name
-                    : productAddData.category.name
+                    ? productEditData.subCategory.name
+                    : productAddData.subCategory.name
                 } // or formData.category.name
                 onChange={
                   isEdit
                     ? (e) =>
                         setProductEditData({
                           ...productEditData,
-                          category: { _id: e.target.value },
+                          subCategory: { _id: e.target.value },
                         })
                     : (e) =>
                         setProductAddData({
                           ...productAddData,
-                          category: { _id: e.target.value },
+                          subCategory: { _id: e.target.value },
                         })
                 }
               >
-                {categories.map((category) => (
-                  <option key={category._id} value={category._id}>
-                    {category.name}
+                {categories.map((subCategory) => (
+                  <option key={subCategory._id} value={subCategory._id}>
+                    {subCategory.name}
                   </option>
                 ))}
               </select>

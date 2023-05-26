@@ -21,7 +21,6 @@ function DashboardHome() {
   const [countUsers, setCountUsers] = useState(0);
   const [countProducts, setCountProducts] = useState(0);
   const [countOrders, setCountOrders] = useState(0);
-  const [countTrainings, setCountTrainings] = useState(0);
 
   ChartJS.register(
     ArcElement,
@@ -36,15 +35,14 @@ function DashboardHome() {
   const users = countUsers;
   const products = countProducts;
   const orders = countOrders;
-  const trainings = countTrainings;
 
   const data = {
-    labels: ["Users", "Products", "Orders", "Trainings"],
+    labels: ["Users", "Products", "Orders"],
     datasets: [
       {
         // label: "# of Votes",
-        data: [users, products, orders, trainings],
-        backgroundColor: ["#810f05", "#810f0586", "#669bbc", "#4b100c"],
+        data: [users, products, orders],
+        backgroundColor: ["#f9e077", "#66696a", "#c7d1c1"],
         borderWidth: 1,
       },
     ],
@@ -75,22 +73,17 @@ function DashboardHome() {
       {
         label: "Users",
         data: labels.map(() => users),
-        backgroundColor: "#810f05",
+        backgroundColor: "#f9e077",
       },
       {
         label: "Products",
         data: labels.map(() => products),
-        backgroundColor: "#810f0586",
+        backgroundColor: "#66696a",
       },
       {
         label: "Order",
         data: labels.map(() => orders),
-        backgroundColor: "#669bbc",
-      },
-      {
-        label: "Trainings",
-        data: labels.map(() => trainings),
-        backgroundColor: "#4b100c",
+        backgroundColor: "#c7d1c1",
       },
     ],
   };
@@ -101,6 +94,7 @@ function DashboardHome() {
         `${process.env.REACT_APP_API_URL}/api/user`
       );
       setCountUsers(response.data.totalItems);
+      // console.log(response.data.totalItems);
     } catch (e) {
       console.log(e);
     }
@@ -128,24 +122,13 @@ function DashboardHome() {
     }
   };
 
-  const getTrainings = async () => {
-    try {
-      const response = await axios.get(
-        `${process.env.REACT_APP_API_URL}/api/training`
-      );
-      setCountTrainings(response.data.totalItems);
-    } catch (e) {
-      console.log(e);
-    }
-  };
 
   useEffect(() => {
     getUsers();
     getProducts();
     getOrders();
-    getTrainings();
   }, []);
-
+  
   return (
     <div className="dashboard-home onLoad">
       <div className="dashboard-home-stats">
@@ -164,12 +147,6 @@ function DashboardHome() {
           title="Orders"
           dataCount={countOrders}
           onClick={() => navigate("/dashboard-orders")}
-          style={{ flexGrow: 1 }}
-        />
-        <DashboardCard
-          title="Trainings"
-          dataCount={countTrainings}
-          onClick={() => navigate("/dashboard-trainings")}
           style={{ flexGrow: 1 }}
         />
       </div>

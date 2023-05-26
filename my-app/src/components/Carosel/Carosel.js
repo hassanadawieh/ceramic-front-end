@@ -7,7 +7,7 @@ import "./Carosel.css";
     const [products , setProducts] = useState([]);
 
     const dataFetch = () => {
-        axios.get(`${process.env.REACT_APP_API_URL}/product`)
+        axios.get(`${process.env.REACT_APP_API_URL}/api/product`)
         .then((response) => {
          setAllProducts(response.data.items);
         })
@@ -31,7 +31,7 @@ import "./Carosel.css";
           <span style={{ "--i": index + 1 }}>
             <img
               key={element._id}
-              src={`http://localhost:5000/${element.image}`}
+              src={`${process.env.REACT_APP_API_URL}/${element.image}`}
               alt="image"
             />
           </span>

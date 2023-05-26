@@ -23,7 +23,7 @@ const handleShowProductHidden = ( b ,element) => {
     const arrayProducts = [];
     for (let i = 0; i < order.length; i++) {
       await axios
-        .get(`${process.env.REACT_APP_API_URL}/product/${order[i]}`)
+        .get(`${process.env.REACT_APP_API_URL}/api/product/${order[i]}`)
         .then((response) => {
           arrayProducts.push(response.data);
         });
@@ -57,7 +57,7 @@ const handleShowProductHidden = ( b ,element) => {
             <div className="card-order">
               <img
                 className="image-order"
-                src={`http://localhost:5000/${element.image}`}
+                src={`${process.env.REACT_APP_API_URL}/${element.image}`}
                 alt="img-product"
               />
               <div className="info-order">

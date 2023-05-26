@@ -32,7 +32,7 @@ const Product = () => {
     const fetchData = async () => {
       let arrauSubCategory = [];
       await axios
-        .get(`${process.env.REACT_APP_API_URL}/subCategory`)
+        .get(`${process.env.REACT_APP_API_URL}/api/subCategory`)
         .then((response) => {
           try {
             for(let i = 0 ; i < response.data.length ; i++) {
@@ -72,7 +72,7 @@ const Product = () => {
       for (let i = 0; i < numberPages.length; i++) {
         try {
           const response = await axios.get(
-            `${process.env.REACT_APP_API_URL}/product?page=${numberPages[i]}`
+            `${process.env.REACT_APP_API_URL}/api/product?page=${numberPages[i]}`
           );
           for (let i = 0; i < response.data.items.length; i++) {
             arrayAllProducts.push(response.data.items[i]);
@@ -102,7 +102,7 @@ const Product = () => {
 
   const fetchAllProducts = () => {
     axios
-      .get(`${process.env.REACT_APP_API_URL}/product?page=${page}`)
+      .get(`${process.env.REACT_APP_API_URL}/api/product?page=${page}`)
       .then((response) => {
         try {
           setProducts(response.data.items);

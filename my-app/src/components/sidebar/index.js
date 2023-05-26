@@ -68,7 +68,7 @@ const Sidebar = () => {
       <nav className="sidebar-bottom-nav">
         <Tooltip title={isClosed ? "Log Out" : ""} placement="right">
           <NavLink
-            to="/admin-login"
+            to="/login"
             className="sidebar-logout spacing hover"
             onClick={() => {
               Cookies.remove("admin-token");

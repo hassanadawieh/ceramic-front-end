@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./Login.css";
 import Logo from "../../images/logo.svg";
@@ -12,6 +13,8 @@ const Login = () => {
   const [userLogin , setUserLogin] = useState({email: "" , password : ""});
   const [userRegister , setUserRegister] = useState({fullName : "" , email : "" , password : "" , address : "" , phoneNumber : ""})
   const [errorMessage , setErrorMessage] = useState("");
+
+  const navigate = useNavigate();
 
   // fuction checked the admin
   const handleCheckedAdmin = () => {
@@ -110,6 +113,7 @@ useEffect(() => {
       console.log(response);
 
       if (response.status == 200) {
+        navigate("/");
         const oneWeek = 7 * 24 * 60 * 60 * 1000;
         Cookies.set("user-token", response.data.token, {
           expires: oneWeek,
@@ -143,6 +147,7 @@ useEffect(() => {
         console.log(response);
 
         if (response.status == 200) {
+          navigate("/")
           const oneWeek = 7 * 24 * 60 * 60 * 1000;
           Cookies.set("admin-token", response.data.token, {
             expires: oneWeek,

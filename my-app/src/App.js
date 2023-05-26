@@ -1,3 +1,4 @@
+import react , { useEffect } from "react";
 import { Route, Routes, useLocation } from "react-router-dom";
 import Header from "../src/components/Header/Header";
 import Footer from "../src/components/Footer/Footer";
@@ -24,13 +25,17 @@ function App() {
 const location = useLocation();
 const isNotFoundPath =  location.pathname === "*";
 const isUnauthorizedPath = location.pathname === "/unauthorized";
-const isDashboardPath = location.pathname === "/dashboard"; 
+const isDashboardPath = location.pathname.startsWith("/dashboard"); 
 const isLoginPath = location.pathname === "/login";
 
 const shouldRenderHeader =  isNotFoundPath || isUnauthorizedPath || isDashboardPath || isLoginPath;
 
-console.log({isNotFoundPath, isUnauthorizedPath, isDashboardPath, isLoginPath});
-console.log(location.pathname)
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
+
   return (
     <DataProvider>
       <div className="App">

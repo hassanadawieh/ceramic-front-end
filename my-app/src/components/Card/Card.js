@@ -23,7 +23,7 @@ const Card = (props) => {
       ></div>
       <img
         className="img-product"
-        src={`http://localhost:5000/${props.image}`}
+        src={`${process.env.REACT_APP_API_URL}/${props.image}`}
         alt="card-product"
       />
       <div className="information-card">

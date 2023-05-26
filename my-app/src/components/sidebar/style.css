@@ -5,7 +5,7 @@
   padding: 20px 0;
   margin-top: 20px;
   margin-left: 20px;
-  background-color: var(--accent-color);
+  background-color: var(--A);
   border-radius: 10px;
   display: flex;
   justify-content: space-between;
@@ -54,7 +54,7 @@
 }
 
 .sidebar-links {
-  color: var(--secondary-color);
+  color: var(--C);
 }
 
 .sidebar-links p {
